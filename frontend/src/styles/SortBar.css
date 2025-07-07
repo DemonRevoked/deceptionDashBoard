@@ -1,0 +1,9 @@
+/* src/styles/SortBar.css */
+.sort-bar {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  background: var(--card-bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}

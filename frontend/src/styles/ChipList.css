@@ -1,0 +1,22 @@
+/* src/styles/ChipList.css */
+.chip-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+.chip {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+.chip__close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}

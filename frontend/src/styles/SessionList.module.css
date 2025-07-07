@@ -1,0 +1,13 @@
+.container {
+    /* Add any component-specific container styles here */
+}
+
+.sessionTable {
+    /* Example of overriding or extending generic table styles */
+}
+
+.verdict {
+    font-style: italic;
+    color: var(--secondary-text-color);
+    max-width: 300px;
+}

@@ -1,0 +1,96 @@
+/* Global variables for a consistent dark theme */
+:root {
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #bb86fc;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #b0b0b0;
+  --border-color: #333333;
+  --input-bg-color: #2c2c2c;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between; /* This pushes the nav links and logout button apart */
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--secondary-text-color);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--primary-color);
+}
+
+.logout-button {
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: var(--primary-color);
+  color: #000;
+  border-color: var(--primary-color);
+}
+
+.content {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Generic styles for tables, loading, errors etc. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th, .table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.table thead {
+  background-color: var(--surface-color);
+}

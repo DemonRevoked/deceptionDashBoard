@@ -1,0 +1,42 @@
+.container {
+    /* Component-specific container styles */
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    background-color: var(--surface-color);
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.metaGrid div {
+    color: var(--secondary-text-color);
+}
+
+.metaGrid strong {
+    color: var(--primary-text-color);
+}
+
+.commandBlock, .transcript {
+    background-color: #0d0d0d; /* Even darker for code blocks */
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #d4d4d4;
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.9em;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+h3 {
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}

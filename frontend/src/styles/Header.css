@@ -1,0 +1,16 @@
+/* src/styles/Header.css */
+.header {
+  text-align: center;
+  padding: 1rem 0;
+}
+.header__logo {
+  font-size: 3rem;
+  color: var(--accent);
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+.header__tagline {
+  font-size: 1rem;
+  color: var(--fg);
+  margin-top: 0.5rem;
+}

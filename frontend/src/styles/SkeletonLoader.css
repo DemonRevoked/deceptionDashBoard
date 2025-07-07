@@ -1,0 +1,17 @@
+/* src/styles/SkeletonLoader.css */
+.skeleton-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+.skeleton-card {
+  height: 80px;
+  background: #2a2a3f;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

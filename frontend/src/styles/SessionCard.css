@@ -1,0 +1,120 @@
+:root {
+  --bg: #1e1e2f;
+  --fg: #e0e0e0;
+  --accent: #3a8dde;
+  --card-bg: #2a2a3f;
+  --border: #3a3a4f;
+}
+
+/* Card container */
+.session-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Header */
+.session-card__header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.session-card__header:hover,
+.session-card__header:focus {
+  background: #34344f;
+  outline: none;
+}
+
+/* Arrow icon */
+.session-card__arrow {
+  margin-right: 8px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+/* IP & meta text */
+.session-card__ip {
+  flex: 1;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+.session-card__meta {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-left: 1rem;
+}
+
+/* Analyze button */
+.session-card__analyze-btn {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.session-card__analyze-btn:hover:not(:disabled) {
+  opacity: 0.8;
+}
+.session-card__analyze-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Session list */
+.session-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px 12px;
+}
+.session-card__item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.session-card__link {
+  text-decoration: none;
+  color: var(--fg);
+}
+
+/* Command code styling */
+.session-card__code {
+  display: block;
+  font-family: 'Source Code Pro', monospace;
+  background: #232338;
+  padding: 4px 6px;
+  border-radius: 3px;
+  color: #a8ff60;
+  white-space: pre-wrap;
+}
+
+/* AI verdict section */
+.session-card__ai-verdict {
+  background: #252534;
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  color: var(--fg);
+}
+.session-card__ai-verdict h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--accent);
+}
+.session-card__ai-verdict p {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+.session-card__analyze-btn:disabled {
+  display: none;
+}

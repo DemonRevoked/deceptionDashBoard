@@ -1,0 +1,18 @@
+/* src/styles/SearchBar.css */
+.search-bar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.search-bar__input {
+  width: 80%;
+  max-width: 500px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--fg);
+}
+.search-bar__input::placeholder {
+  color: #888;
+}
