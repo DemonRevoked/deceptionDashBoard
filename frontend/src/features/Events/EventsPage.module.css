@@ -1,0 +1,37 @@
+.container {
+  padding: 2rem;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.eventTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e1e1e;
+  color: #fff;
+}
+.eventTable th, .eventTable td {
+  border: 1px solid #333;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.eventTable th {
+  background: #232323;
+}
+.eventTable tr:nth-child(even) {
+  background: #181818;
+}
+pre {
+  margin: 0;
+  font-size: 0.95em;
+  background: none;
+  color: #bb86fc;
+}
+.error {
+  color: #ff6b6b;
+  margin: 1rem 0;
+} 

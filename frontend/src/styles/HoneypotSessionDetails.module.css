@@ -1,0 +1,92 @@
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.metaGrid div {
+  color: var(--fg);
+}
+
+.metaGrid strong {
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
+.commandBlock, .transcript {
+  background-color: #0d0d0d;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #d4d4d4;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9em;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.command {
+  margin: 0.25rem 0;
+}
+
+.prompt {
+  color: var(--accent);
+  user-select: none;
+}
+
+.analyzeButton {
+  margin: 2rem 0;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.analyzeButton:hover {
+  opacity: 0.8;
+}
+
+.analysis {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+.analysis h3 {
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+.analysis p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--fg);
+}
+
+.error {
+  color: #ff6b6b;
+}
