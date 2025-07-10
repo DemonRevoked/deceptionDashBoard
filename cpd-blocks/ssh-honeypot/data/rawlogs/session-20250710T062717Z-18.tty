@@ -1,0 +1,19 @@
+Script started on 2025-07-10 06:27:17+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="98" LINES="23" SOURCE_IP="10.0.44.30"]
+Script started on 2025-07-10 06:27:17+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="98" LINES="23"]
+]0;root@72122edf3045: ~root@72122edf3045:~# ls
+]0;root@72122edf3045: ~root@72122edf3045:~# whoami
+root
+]0;root@72122edf3045: ~root@72122edf3045:~# cd  df -h
+Filesystem                         Size  Used Avail Use% Mounted on
+overlay                             97G   39G   54G  42% /
+tmpfs                               64M     0   64M   0% /dev
+shm                                 64M     0   64M   0% /dev/shm
+/dev/mapper/ubuntu--vg-ubuntu--lv   97G   39G   54G  42% /etc/hosts
+tmpfs                               20G     0   20G   0% /proc/asound
+tmpfs                               20G     0   20G   0% /proc/acpi
+tmpfs                               20G     0   20G   0% /proc/scsi
+tmpfs                               20G     0   20G   0% /sys/firmware
+]0;root@72122edf3045: ~root@72122edf3045:~# eu xit
+exit
+
+Script done on 2025-07-10 06:27:29+00:00 [COMMAND_EXIT_CODE="0"]

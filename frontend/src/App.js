@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from 'react-router-dom';
-import SessionList from './components/SessionList';
-import SessionDetail from './components/SessionDetail';
-import NtpRequests from './components/NtpRequests';
+import HomeDashboard from './features/HomeDashboard/HomeDashboard';
+import HoneypotPage from './features/Honeypot/HoneypotPage';
+import HoneypotSessionDetails from './components/HoneypotSessionDetails';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { ProtectedRoute } from './auth/ProtectedRoute';
@@ -20,9 +20,10 @@ function App() {
           <main className="content">
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<ProtectedRoute><SessionList /></ProtectedRoute>} />
-              <Route path="/sessions/:id" element={<ProtectedRoute><SessionDetail /></ProtectedRoute>} />
-              <Route path="/ntp" element={<ProtectedRoute><NtpRequests /></ProtectedRoute>} />
+              <Route path="/" element={<ProtectedRoute><HomeDashboard /></ProtectedRoute>} />
+              <Route path="/honeypot/:id" element={<ProtectedRoute><HoneypotPage /></ProtectedRoute>} />
+              <Route path="/sessions/:sessionId" element={<ProtectedRoute><HoneypotSessionDetails /></ProtectedRoute>} />
+              <Route path="*" element={<ProtectedRoute><HomeDashboard /></ProtectedRoute>} />
             </Routes>
           </main>
         </div>
@@ -44,8 +45,8 @@ function Navigation() {
   return (
     <nav className="main-nav">
       <ul>
-        <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>SSH Sessions</NavLink></li>
-        <li><NavLink to="/ntp" className={({ isActive }) => isActive ? "active" : ""}>NTP Requests</NavLink></li>
+        <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink></li>
+        {/* Dynamically add honeypot links here in the future */}
       </ul>
       <button onClick={logout} className="logout-button">Logout</button>
     </nav>

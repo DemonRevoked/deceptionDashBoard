@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   ssh-honeypot:
     build:
@@ -11,6 +9,8 @@ services:
     volumes:
       - ./data/ttylogs:/var/log/tty
     restart: always
+    networks:
+      - advdeception-net
 
   ssh-parser:
     build:
@@ -20,10 +20,17 @@ services:
     depends_on:
       - ssh-honeypot
     volumes:
-      - ./data/ttylogs:/data/ttylogs
+      - ./data/ttylogs:/data/ssh_sessions
       - ./data/rawlogs:/data/raw
       - ./data/jsonlogs:/data/json
     environment:
-      - MONGO_URI=mongodb://mongo:27017/honeypot-ssh
+      - MONGO_URI=mongodb://mongo:27017/advdeception
+      - HONEYPOT_NAME=ssh-honeypot
       - SCAN_INTERVAL=10
     restart: always
+    networks:
+      - advdeception-net
+
+networks:
+  advdeception-net:
+    external: true

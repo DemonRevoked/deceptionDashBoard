@@ -12,10 +12,12 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - MONGO_URI=mongodb://mongo:27017/data
+      - MONGO_URI=mongodb://mongo:27017/advdeception
     command: npm run dev
     ports:
       - "5000:5000"
+    networks:
+      - advdeception-net
 
   frontend:
     build: ./frontend
@@ -30,13 +32,23 @@ services:
       - CHOKIDAR_USEPOLLING=true # Necessary for hot-reloading to work inside Docker
     ports:
       - "3000:3000"
+    networks:
+      - advdeception-net
   
   mongo:
-    image: mongo:4.4
+    image: mongo:4.4.6
     container_name: mongo
+    command: mongod --wiredTigerCacheSizeGB 1 --bind_ip_all
     ports:
       - "27017:27017"
     restart: always
     volumes:
       - ./mongo/data:/data/db
+    networks:
+      - advdeception-net
+
 # no named volumes needed if you bind-mount host folders
+
+networks:
+  advdeception-net:
+    external: true

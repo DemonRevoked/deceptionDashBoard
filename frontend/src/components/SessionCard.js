@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/SessionCard.css';
+import '../styles/HoneypotSessionSummary.css';
 
-export default function SessionCard({
+export default function HoneypotSessionSummary({
   ip,
   sessions,
   isOpen,
@@ -17,26 +17,26 @@ export default function SessionCard({
   const totalCmds = sessions.reduce((sum, s) => sum + (s.commands?.length || 0), 0);
 
   return (
-    <div className="session-card">
+    <div className="session-summary">
       <div
-        className="session-card__header"
+        className="session-summary__header"
         onClick={toggle}
         tabIndex={0}
         onKeyPress={e => e.key === 'Enter' && toggle()}
       >
         <span
-          className="session-card__arrow"
+          className="session-summary__arrow"
           style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}
         >
           ▶
         </span>
-        <span className="session-card__ip">{ip}</span>
-        <span className="session-card__meta">
+        <span className="session-summary__ip">{ip}</span>
+        <span className="session-summary__meta">
           {sessions.length} session{sessions.length !== 1 && 's'} • last {lastTime} • {totalCmds}{' '}
           cmd{totalCmds !== 1 && 's'}
         </span>
         <button
-          className="session-card__analyze-btn"
+          className="session-summary__analyze-btn"
           onClick={e => {
             e.stopPropagation();
             onAnalyze(ip);
@@ -49,14 +49,22 @@ export default function SessionCard({
 
       {isOpen && (
         <>
-          <ul className="session-card__list">
+          <ul className="session-summary__list">
             {sessions.map(sess => (
-              <li key={sess.session_id} className="session-card__item">
+              <li key={sess.session_id} className="session-summary__item">
                 <Link
                   to={`/sessions/${encodeURIComponent(sess.session_id)}`}
-                  className="session-card__link"
+                  className="session-summary__link"
                 >
-                  <code className="session-card__code">
+                  <div className="session-summary__session-header">
+                    <span className="session-summary__time">
+                      {new Date(sess.start_time).toLocaleString()}
+                    </span>
+                    <span className="session-summary__duration">
+                      ({Math.round(sess.duration)}s)
+                    </span>
+                  </div>
+                  <code className="session-summary__code">
                     {sess.commands?.join('   |   ') || '[no commands]'}
                   </code>
                 </Link>
@@ -65,7 +73,7 @@ export default function SessionCard({
           </ul>
 
           {analysis.verdict && (
-            <div className="session-card__ai-verdict">
+            <div className="session-summary__ai-verdict">
               <h3>AI Verdict</h3>
               <p>{analysis.verdict}</p>
             </div>

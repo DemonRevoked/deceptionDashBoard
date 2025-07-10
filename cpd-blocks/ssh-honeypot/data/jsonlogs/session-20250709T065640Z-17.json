@@ -1,0 +1,25 @@
+{
+  "session_id": "session-20250709T065640Z-17",
+  "honeypot_id": "686e018d3d8b8842c0613c2a",
+  "protocol": "ssh",
+  "source_ip": "10.0.44.30",
+  "start_time": "2025-07-09 06:56:40+00:00",
+  "end_time": "2025-07-09 06:57:44+00:00",
+  "duration": 64.0,
+  "exit_code": 0,
+  "terminal": {
+    "type": "xterm-256color",
+    "tty": "/dev/pts/0",
+    "columns": 99,
+    "lines": 23
+  },
+  "commands": [
+    "who ami",
+    "ls",
+    "echo \"user\b \b\b \b\b \b\b \b\b \b%user",
+    "echo\b \b\b \b\b \b\b \badduser dmeon\b \b\b \b\b \b\b \bd\b \bemon",
+    "cd\b \b\b \bsu demon",
+    "exut\b \b\b \bit",
+    "sudop \b \b\b \b\b \b\b \b\b \b\b \b\u0007\u0007\u0007exiut\b \b\b \bt"
+  ]
+}

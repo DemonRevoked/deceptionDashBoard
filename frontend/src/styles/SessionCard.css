@@ -6,8 +6,8 @@
   --border: #3a3a4f;
 }
 
-/* Card container */
-.session-card {
+/* Summary container */
+.session-summary {
   background-color: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -17,7 +17,7 @@
 }
 
 /* Header */
-.session-card__header {
+.session-summary__header {
   display: flex;
   align-items: center;
   padding: 12px 16px;
@@ -27,33 +27,33 @@
   border-bottom: 1px solid var(--border);
   transition: background 0.2s;
 }
-.session-card__header:hover,
-.session-card__header:focus {
+.session-summary__header:hover,
+.session-summary__header:focus {
   background: #34344f;
   outline: none;
 }
 
 /* Arrow icon */
-.session-card__arrow {
+.session-summary__arrow {
   margin-right: 8px;
   color: var(--accent);
   transition: transform 0.2s ease;
 }
 
 /* IP & meta text */
-.session-card__ip {
+.session-summary__ip {
   flex: 1;
   font-size: 1.1rem;
   color: var(--fg);
 }
-.session-card__meta {
+.session-summary__meta {
   font-size: 0.85rem;
   color: #bbb;
   margin-left: 1rem;
 }
 
 /* Analyze button */
-.session-card__analyze-btn {
+.session-summary__analyze-btn {
   margin-left: 1rem;
   padding: 0.4rem 0.8rem;
   background: var(--accent);
@@ -64,57 +64,77 @@
   cursor: pointer;
   transition: opacity 0.2s;
 }
-.session-card__analyze-btn:hover:not(:disabled) {
+.session-summary__analyze-btn:hover:not(:disabled) {
   opacity: 0.8;
 }
-.session-card__analyze-btn:disabled {
+.session-summary__analyze-btn:disabled {
   opacity: 0.6;
   cursor: default;
 }
 
 /* Session list */
-.session-card__list {
+.session-summary__list {
   list-style: none;
   margin: 0;
   padding: 0 16px 12px;
 }
-.session-card__item {
+.session-summary__item {
   padding: 8px 0;
   border-bottom: 1px solid var(--border);
 }
-.session-card__link {
+.session-summary__item:last-child {
+  border-bottom: none;
+}
+.session-summary__link {
   text-decoration: none;
   color: var(--fg);
+  display: block;
+}
+.session-summary__link:hover .session-summary__code {
+  background: #2a2a45;
+}
+
+/* Session header */
+.session-summary__session-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+.session-summary__time {
+  flex: 1;
+}
+.session-summary__duration {
+  color: var(--accent);
 }
 
 /* Command code styling */
-.session-card__code {
+.session-summary__code {
   display: block;
   font-family: 'Source Code Pro', monospace;
   background: #232338;
-  padding: 4px 6px;
+  padding: 8px 12px;
   border-radius: 3px;
   color: #a8ff60;
   white-space: pre-wrap;
+  transition: background 0.2s;
 }
 
 /* AI verdict section */
-.session-card__ai-verdict {
+.session-summary__ai-verdict {
   background: #252534;
   border-top: 1px solid var(--border);
   padding: 1rem 1.5rem;
   color: var(--fg);
 }
-.session-card__ai-verdict h3 {
+.session-summary__ai-verdict h3 {
   margin: 0 0 0.5rem;
   font-size: 1rem;
   color: var(--accent);
 }
-.session-card__ai-verdict p {
+.session-summary__ai-verdict p {
   margin: 0;
   line-height: 1.4;
   font-size: 0.9rem;
-}
-.session-card__analyze-btn:disabled {
-  display: none;
 }

@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 #
-# record every SSH session to /var/log/tty/<timestamp>.tty
+# record every SSH session to /var/log/tty/<timestamp>-<ip>.tty
 #
 
 LOG_DIR="/var/log/tty"
 mkdir -p "$LOG_DIR"
 
-# unique session filename
+# Get source IP from SSH_CONNECTION
+SOURCE_IP=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+
+# unique session filename with IP
 SESSION_ID="$(date -u +%Y%m%dT%H%M%SZ)-$$"
 TTY_FILE="$LOG_DIR/session-${SESSION_ID}.tty"
 
-# -q: quiet, -f: flush after each write
-exec script -q -f "$TTY_FILE" /bin/bash
+# Add source IP to session start marker
+echo "Script started on $(date -u +"%Y-%m-%d %H:%M:%S%:z") [TERM=\"$TERM\" TTY=\"$(tty)\" COLUMNS=\"$COLUMNS\" LINES=\"$LINES\" SOURCE_IP=\"$SOURCE_IP\"]" > "$TTY_FILE"
+
+# Record the session (-a: append mode since we wrote the header)
+script -q -f -a "$TTY_FILE" /bin/bash
