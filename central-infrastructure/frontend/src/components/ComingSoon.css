@@ -1,0 +1,243 @@
+/* Coming Soon Page Styles */
+.coming-soon-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 20px;
+}
+
+.coming-soon-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(51, 65, 85, 0.7));
+  border: 1px solid #334155;
+  border-radius: 20px;
+  padding: 48px 32px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.coming-soon-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  animation: bounce 2s infinite;
+}
+
+.coming-soon-title {
+  color: #f8fafc;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coming-soon-description {
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coming-soon-timeline {
+  margin-bottom: 32px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.timeline-icon {
+  font-size: 20px;
+}
+
+.timeline-text {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.coming-soon-features {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.coming-soon-features h3 {
+  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(51, 65, 85, 0.3);
+  border: 1px solid #475569;
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+  transform: translateX(4px);
+}
+
+.feature-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.coming-soon-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(51, 65, 85, 0.8);
+  color: #e2e8f0;
+  border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+  background: rgba(71, 85, 105, 0.8);
+  border-color: #64748b;
+  transform: translateY(-2px);
+}
+
+.coming-soon-footer {
+  border-top: 1px solid #334155;
+  padding-top: 24px;
+}
+
+.coming-soon-footer p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coming-soon-container {
+    padding: 32px 24px;
+    margin: 20px;
+  }
+  
+  .coming-soon-title {
+    font-size: 28px;
+  }
+  
+  .coming-soon-description {
+    font-size: 16px;
+  }
+  
+  .coming-soon-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-container {
+    padding: 24px 20px;
+  }
+  
+  .coming-soon-title {
+    font-size: 24px;
+  }
+  
+  .coming-soon-icon {
+    font-size: 60px;
+  }
+  
+  .timeline-item {
+    padding: 12px 16px;
+  }
+  
+  .feature-item {
+    padding: 10px 12px;
+  }
+}

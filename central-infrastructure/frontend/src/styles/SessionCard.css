@@ -1,0 +1,142 @@
+:root {
+  --bg: var(--bg-secondary);
+  --fg: var(--text-primary);
+  --accent: var(--accent-primary);
+  --card-bg: var(--bg-tertiary);
+  --border: var(--border-primary);
+}
+
+/* Summary container */
+.session-summary {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Header */
+.session-summary__header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.session-summary__header:hover,
+.session-summary__header:focus {
+  background: #34344f;
+  outline: none;
+}
+
+/* Arrow icon */
+.session-summary__arrow {
+  margin-right: 8px;
+  color: var(--accent-primary);
+  transition: transform 0.2s ease;
+}
+
+/* IP & meta text */
+.session-summary__ip {
+  flex: 1;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+.session-summary__meta {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-left: 1rem;
+}
+
+/* Analyze button */
+.session-summary__analyze-btn {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, opacity 0.2s;
+  box-shadow: var(--accent-glow);
+}
+.session-summary__analyze-btn:hover:not(:disabled) {
+  opacity: 0.85;
+  box-shadow: 0 0 12px 2px var(--accent-primary);
+}
+.session-summary__analyze-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Session list */
+.session-summary__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px 12px;
+}
+.session-summary__item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.session-summary__item:last-child {
+  border-bottom: none;
+}
+.session-summary__link {
+  text-decoration: none;
+  color: var(--fg);
+  display: block;
+}
+.session-summary__link:hover .session-summary__code {
+  background: #2a2a45;
+}
+
+/* Session header */
+.session-summary__session-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+.session-summary__time {
+  flex: 1;
+}
+.session-summary__duration {
+  color: var(--accent-primary);
+}
+
+/* Command code styling */
+.session-summary__code {
+  display: block;
+  font-family: 'Source Code Pro', monospace;
+  background: #232338;
+  padding: 8px 12px;
+  border-radius: 3px;
+  color: #a8ff60;
+  white-space: pre-wrap;
+  transition: background 0.2s;
+}
+
+/* AI verdict section */
+.session-summary__ai-verdict {
+  background: #252534;
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  color: var(--fg);
+}
+.session-summary__ai-verdict h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--accent-primary);
+}
+.session-summary__ai-verdict p {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}

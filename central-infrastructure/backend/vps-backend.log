@@ -1,0 +1,25 @@
+nohup: ignoring input
+🔄 Attempting to connect to MongoDB...
+📊 Database connected: advdeception
+📊 Setting up MongoDB change streams for streamlined collections...
+✅ MongoDB change streams active for streamlined collections
+✅ Database-dependent routes mounted successfully
+🚀 AdvDeception Backend ready on port 5000 (with database)
+📊 Deception detection change stream error (falling back to polling): The $changeStream stage is only supported on replica sets
+📊 Scan alerts change stream error (falling back to polling): The $changeStream stage is only supported on replica sets
+✅ Database indexes created successfully
+Consolidated events query: {
+  "timestamp": {
+    "$gte": "2025-08-28T12:05:38.871Z"
+  }
+}
+Found 0 consolidated events
+🔌 Client connected. Total: 1
+📊 Fetched 0 scan alerts for dashboard
+📊 Client subscribed to dashboard updates
+🔌 Client connected. Total: 2
+🔌 Client disconnected: transport close. Total: 1
+🔌 Client disconnected: transport close. Total: 0
+🔌 Client connected. Total: 1
+🔌 Client disconnected: transport close. Total: 0
+🔌 Client connected. Total: 1

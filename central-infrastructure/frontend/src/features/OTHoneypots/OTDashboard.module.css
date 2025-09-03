@@ -1,0 +1,768 @@
+/* Industrial/Factory Theme for OT Dashboard */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%);
+  color: #e2e8f0;
+  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+  padding: 24px;
+  position: relative;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 98px,
+      rgba(59, 130, 246, 0.03) 100px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 98px,
+      rgba(59, 130, 246, 0.03) 100px
+    );
+  pointer-events: none;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(148, 163, 184, 0.1);
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.industrialIcon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.6));
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.connectionStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.statusIndicator.connected {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border-color: #10b981;
+  color: #d1fae5;
+  box-shadow: 
+    0 0 15px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.statusIndicator.disconnected {
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+  border-color: #ef4444;
+  color: #fee2e2;
+  box-shadow: 
+    0 0 15px rgba(239, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.statusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Time Controls */
+.timeControls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid #475569;
+  border-radius: 6px;
+}
+
+.timeControls label {
+  font-weight: bold;
+  color: #f1f5f9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timeSelector {
+  padding: 8px 16px;
+  background: #0f172a;
+  border: 2px solid #3b82f6;
+  border-radius: 4px;
+  color: #e2e8f0;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timeSelector:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+/* Critical Alerts */
+.criticalAlerts {
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+  border: 2px solid #ef4444;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.alertTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fee2e2;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.alertsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 16px;
+}
+
+.criticalAlert {
+  background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  padding: 16px;
+  position: relative;
+}
+
+.criticalAlert::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.alertHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.alertSeverity {
+  background: #dc2626;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.alertTime {
+  font-size: 0.875rem;
+  color: #fca5a5;
+}
+
+.alertContent strong {
+  color: #fee2e2;
+  font-size: 1.1rem;
+}
+
+.alertContent p {
+  color: #fecaca;
+  margin: 8px 0;
+}
+
+.alertIndicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.indicator {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fee2e2;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  border: 1px solid #ef4444;
+}
+
+/* Systems Overview */
+.systemsOverview {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  margin: 0 0 24px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 8px;
+}
+
+.honeypotsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.honeypotCard {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #475569;
+  border-radius: 8px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.honeypotCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.honeypotCard:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.honeypotCard:hover::before {
+  left: 100%;
+}
+
+.honeypotHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.honeypotIcon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.6));
+}
+
+.honeypotInfo {
+  flex: 1;
+}
+
+.honeypotInfo h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.honeypotInfo p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid;
+}
+
+.status.active {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border-color: #10b981;
+  color: #d1fae5;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.status.inactive {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  border-color: #6b7280;
+  color: #d1d5db;
+}
+
+.honeypotDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid #334155;
+  border-radius: 4px;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detailItem span:first-child {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detailItem span:last-child {
+  color: #f1f5f9;
+  font-weight: bold;
+}
+
+.honeypotStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statItem span:first-child {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.statItem span:last-child {
+  color: #3b82f6;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Analytics Grid */
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chartCard {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #475569;
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+}
+
+.chartCard::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.chartTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.chartContainer {
+  height: 300px;
+  position: relative;
+}
+
+.noData {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-style: italic;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px dashed #334155;
+  border-radius: 4px;
+}
+
+/* Recent Threats */
+.recentThreats {
+  margin-bottom: 32px;
+}
+
+.threatsTable {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #475569;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-bottom: 2px solid #3b82f6;
+  font-weight: bold;
+  color: #f1f5f9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.threatRow {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #334155;
+  transition: all 0.3s ease;
+}
+
+.threatRow:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.threatRow:last-child {
+  border-bottom: none;
+}
+
+.timestamp {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.system {
+  color: #f1f5f9;
+  font-weight: bold;
+}
+
+.source {
+  color: #60a5fa;
+  font-family: 'Courier New', monospace;
+}
+
+.threatType {
+  color: #e2e8f0;
+}
+
+.severity {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.severity.critical {
+  background: #dc2626;
+  color: #fff;
+}
+
+.severity.high {
+  background: #ea580c;
+  color: #fff;
+}
+
+.severity.medium {
+  background: #ca8a04;
+  color: #fff;
+}
+
+.severity.low {
+  background: #16a34a;
+  color: #fff;
+}
+
+.analyzeBtn, .blockBtn {
+  padding: 6px 12px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.analyzeBtn {
+  border-color: #3b82f6;
+  color: #60a5fa;
+}
+
+.analyzeBtn:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.blockBtn {
+  border-color: #ef4444;
+  color: #f87171;
+}
+
+.blockBtn:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Top Attackers */
+.topAttackers {
+  margin-bottom: 32px;
+}
+
+.attackersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.attackerCard {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #475569;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.attackerCard:hover {
+  border-color: #ef4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.attackerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.attackerIP {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f87171;
+}
+
+.attackCount {
+  background: #dc2626;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.attackerDetails {
+  margin-bottom: 16px;
+}
+
+.maxThreat {
+  color: #ef4444 !important;
+  font-weight: bold !important;
+}
+
+.attackerActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Loading and Error States */
+.loadingState, .errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  text-align: center;
+}
+
+.industrialSpinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #334155;
+  border-left: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorState {
+  color: #f87171;
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.retryButton {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  border: 2px solid #ef4444;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.retryButton:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .honeypotsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tableHeader, .threatRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .tableHeader span, .threatRow span {
+    padding: 4px 0;
+  }
+} 

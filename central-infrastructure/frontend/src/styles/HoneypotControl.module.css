@@ -1,0 +1,191 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--error);
+}
+
+.warning {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid var(--error);
+  border-radius: 6px;
+  padding: 0.4em 0.8em;
+  margin-bottom: 0.8em;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.honeypotList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.honeypotCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.migrationNotice {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.migrationNotice p {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.migrationLinks {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.migrationBtn {
+  background: var(--accent-primary);
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.migrationBtn:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.protocol {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.details {
+  margin-bottom: 1.2rem;
+}
+
+.statusRow, .addressRow {
+  margin-bottom: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.startBtn {
+  background: var(--success);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.startBtn:disabled {
+  background: #2e7d32;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.stopBtn {
+  background: var(--error);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.stopBtn:disabled {
+  background: #b71c1c;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.configBtn {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.configBtn:disabled {
+  background: #0891b2;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.configBtn:hover:not(:disabled) {
+  background: #0284c7;
+}
+
+.refreshBtn {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  margin-right: 1rem;
+  transition: background 0.2s;
+}
+.refreshBtn:disabled {
+  background: #0891b2;
+  opacity: 0.7;
+  cursor: not-allowed;
+} 

@@ -1,0 +1,289 @@
+/* Modal Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  border-radius: 12px 12px 0 0;
+}
+
+.header h3 {
+  margin: 0;
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--border-primary);
+  color: var(--text-primary);
+}
+
+/* Summary */
+.summary {
+  padding: 1rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.summaryText {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Plugin List */
+.pluginList {
+  padding: 2rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.pluginItem {
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.pluginItem.enabled {
+  border-color: var(--success);
+  background: rgba(76, 175, 80, 0.05);
+}
+
+.pluginItem.disabled {
+  border-color: var(--border-primary);
+  opacity: 0.8;
+}
+
+.pluginItem:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-primary);
+}
+
+/* Plugin Toggle */
+.pluginToggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1.25rem;
+  width: 100%;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--success);
+  cursor: pointer;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.pluginInfo {
+  flex: 1;
+}
+
+.pluginHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.pluginName {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.statusEnabled {
+  color: var(--success);
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.statusDisabled {
+  color: var(--text-tertiary);
+  background: rgba(158, 158, 158, 0.1);
+}
+
+/* Plugin Content */
+.pluginDescription {
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+  font-size: 0.85rem;
+}
+
+.pluginFeatures {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.pluginFeatures strong {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Remove all plugin configuration CSS since we removed the config forms */
+
+/* Actions */
+.actions {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  background: var(--bg-secondary);
+  border-radius: 0 0 12px 12px;
+}
+
+.saveBtn {
+  background: var(--success);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.saveBtn:disabled {
+  background: #2e7d32;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.cancelBtn:hover {
+  background: var(--border-primary);
+  color: var(--text-primary);
+}
+
+/* Notes */
+.note {
+  padding: 1rem 2rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-top: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.note p {
+  margin: 0.25rem 0;
+}
+
+/* Loading & Error States */
+.loading, .error {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--error);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal {
+    padding: 0.5rem;
+  }
+  
+  .modalContent {
+    max-width: 100%;
+    max-height: 95vh;
+  }
+  
+  .pluginList {
+    padding: 1rem;
+  }
+  
+  .header,
+  .summary,
+  .actions,
+  .note {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .saveBtn,
+  .cancelBtn {
+    width: 100%;
+  }
+} 

@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # Local MongoDB for Authentication and User Management
+  mongo:
+    image: mongo:4.4
+    container_name: advdeception-mongo-local
+    restart: always
+    ports:
+      - "0.0.0.0:27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-admin123}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-advdeception}
+    volumes:
+      - mongo_data:/data/db
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - advdeception-net
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Backend API Server (VPS API Integration)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: advdeception-backend-vps-api
+    restart: always
+    ports:
+      - "0.0.0.0:${BACKEND_PORT:-5000}:5000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - MONGO_URI=mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-admin123}@mongo:27017/${MONGO_DATABASE:-advdeception}?authSource=admin
+      - VPS_API_URL=${VPS_API_URL:-http://10.0.44.77:8080}
+      - VPS_ADMIN_API_KEY=${VPS_ADMIN_API_KEY:-admin_secure_key_here_change_in_production}
+      - VPS_CLIENT_A_API_KEY=${VPS_CLIENT_A_API_KEY:-client_a_secure_key_123}
+      - VPS_CLIENT_B_API_KEY=${VPS_CLIENT_B_API_KEY:-client_b_secure_key_456}
+      - VPS_CLIENT_C_API_KEY=${VPS_CLIENT_C_API_KEY:-client_c_secure_key_789}
+      - JWT_SECRET=${JWT_SECRET:-your_super_secure_jwt_secret_change_this_in_production}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-demon}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-shadow@123}
+      - HONEYPOT_MANAGER_URL=${HONEYPOT_MANAGER_URL:-http://10.0.44.32:6000}
+      - HONEYPOT_MANAGER_SECRET=${HONEYPOT_MANAGER_SECRET:-your_secure_secret_here}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://10.0.44.32:3000}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - advdeception-net
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/api/health/quick"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: advdeception-frontend-vps-api
+    restart: always
+    ports:
+      - "0.0.0.0:${FRONTEND_PORT:-3000}:3000"
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://10.0.44.32/api}
+      - REACT_APP_WS_URL=${REACT_APP_WS_URL:-ws://10.0.44.32}
+      - REACT_APP_ENV=${NODE_ENV:-production}
+      - GENERATE_SOURCEMAP=${GENERATE_SOURCEMAP:-false}
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - advdeception-net
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Load Balancer (Nginx)
+  load-balancer:
+    image: nginx:alpine
+    container_name: advdeception-loadbalancer-vps-api
+    restart: always
+    ports:
+      - "${LOAD_BALANCER_PORT:-80}:80"
+      - "${LOAD_BALANCER_SSL_PORT:-443}:443"
+    volumes:
+      - ./load-balancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - advdeception-net
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  advdeception-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${CENTRAL_NETWORK_SUBNET:-172.20.0.0/16}

@@ -1,0 +1,5 @@
+
+> dhruv-frontend@1.0.0 start
+> WATCHPACK_POLLING=true react-scripts start
+
+Something is already running on port 3000.

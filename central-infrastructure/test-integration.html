@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Events API Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .loading { opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Enhanced Events API Integration Test</h1>
+    
+    <div class="test-section info">
+        <h3>Test Overview</h3>
+        <p>This test verifies the integration between the frontend and the enhanced events API from the VPS API.</p>
+        <p><strong>Backend:</strong> <span id="backend-status">Checking...</span></p>
+        <p><strong>Frontend:</strong> <span id="frontend-status">Checking...</span></p>
+    </div>
+
+    <div class="test-section">
+        <h3>1. Backend Health Check</h3>
+        <button onclick="testBackendHealth()">Test Backend Health</button>
+        <div id="backend-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>2. VPS API Data Test</h3>
+        <button onclick="testVpsApiData()">Test VPS API Data</button>
+        <div id="vps-api-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Enhanced Events API Test</h3>
+        <button onclick="testEnhancedEvents()">Test Enhanced Events (No Auth)</button>
+        <button onclick="testEnhancedEventsWithAuth()">Test Enhanced Events (With Auth)</button>
+        <div id="enhanced-events-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>4. Authentication Test</h3>
+        <input type="text" id="username" placeholder="Username" value="demon" style="margin: 5px;">
+        <input type="password" id="password" placeholder="Password" value="shadow@123" style="margin: 5px;">
+        <button onclick="testAuthentication()">Test Login</button>
+        <div id="auth-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>5. Complete Integration Test</h3>
+        <button onclick="testCompleteIntegration()">Run Complete Test</button>
+        <div id="complete-result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let authToken = null;
+
+        // Test 1: Backend Health Check
+        async function testBackendHealth() {
+            const resultDiv = document.getElementById('backend-result');
+            resultDiv.innerHTML = '<div class="loading">Testing backend health...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Backend Health Check Passed</h4>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                    document.getElementById('backend-status').textContent = '✅ Healthy';
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.error || 'Unknown error'}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Backend Health Check Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+                document.getElementById('backend-status').textContent = '❌ Failed';
+            }
+        }
+
+        // Test 2: VPS API Data Test
+        async function testVpsApiData() {
+            const resultDiv = document.getElementById('vps-api-result');
+            resultDiv.innerHTML = '<div class="loading">Testing VPS API data...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/test/vps-data`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ VPS API Data Test Passed</h4>
+                            <p><strong>Collections:</strong> ${data.data.collections?.collections?.length || 0}</p>
+                            <p><strong>Total Records:</strong> ${data.data.overview?.overview?.total_records || 0}</p>
+                            <details>
+                                <summary>View Full Response</summary>
+                                <pre>${JSON.stringify(data, null, 2)}</pre>
+                            </details>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.error || 'Unknown error'}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ VPS API Data Test Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Test 3: Enhanced Events API Test
+        async function testEnhancedEvents() {
+            const resultDiv = document.getElementById('enhanced-events-result');
+            resultDiv.innerHTML = '<div class="loading">Testing enhanced events (no auth)...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/enhanced/events?limit=3`);
+                const data = await response.json();
+                
+                if (response.status === 401) {
+                    resultDiv.innerHTML = `
+                        <div class="info">
+                            <h4>ℹ️ Enhanced Events API Requires Authentication</h4>
+                            <p>Expected: 401 Unauthorized</p>
+                            <p>Response: ${data.message || 'No token provided'}</p>
+                        </div>
+                    `;
+                } else if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Enhanced Events API Test Passed (No Auth)</h4>
+                            <p><strong>Events:</strong> ${data.events?.length || 0}</p>
+                            <details>
+                                <summary>View Events</summary>
+                                <pre>${JSON.stringify(data.events, null, 2)}</pre>
+                            </details>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.error || 'Unknown error'}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Enhanced Events API Test Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function testEnhancedEventsWithAuth() {
+            if (!authToken) {
+                document.getElementById('enhanced-events-result').innerHTML = `
+                    <div class="error">
+                        <h4>❌ No Authentication Token</h4>
+                        <p>Please login first using the authentication test above.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const resultDiv = document.getElementById('enhanced-events-result');
+            resultDiv.innerHTML = '<div class="loading">Testing enhanced events with auth...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/enhanced/events?limit=3`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Enhanced Events API Test Passed (With Auth)</h4>
+                            <p><strong>Events:</strong> ${data.events?.length || 0}</p>
+                            <p><strong>Source:</strong> ${data.metadata?.source || 'Unknown'}</p>
+                            <p><strong>Collections Queried:</strong> ${data.metadata?.collections_queried?.join(', ') || 'None'}</p>
+                            <details>
+                                <summary>View Analytics</summary>
+                                <pre>${JSON.stringify(data.analytics, null, 2)}</pre>
+                            </details>
+                            <details>
+                                <summary>View Sample Event</summary>
+                                <pre>${JSON.stringify(data.events?.[0], null, 2)}</pre>
+                            </details>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.error || 'Unknown error'}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Enhanced Events API Test Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Test 4: Authentication Test
+        async function testAuthentication() {
+            const resultDiv = document.getElementById('auth-result');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            resultDiv.innerHTML = '<div class="loading">Testing authentication...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+                
+                if (response.ok && data.token) {
+                    authToken = data.token;
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Authentication Test Passed</h4>
+                            <p><strong>User:</strong> ${data.user?.username || username}</p>
+                            <p><strong>Role:</strong> ${data.user?.role || 'Unknown'}</p>
+                            <p><strong>Token:</strong> ${data.token.substring(0, 20)}...</p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.error || 'Authentication failed'}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Authentication Test Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Test 5: Complete Integration Test
+        async function testCompleteIntegration() {
+            const resultDiv = document.getElementById('complete-result');
+            resultDiv.innerHTML = '<div class="loading">Running complete integration test...</div>';
+            
+            const results = [];
+            
+            try {
+                // Test 1: Backend Health
+                try {
+                    const healthResponse = await fetch(`${API_BASE}/health`);
+                    const healthData = await healthResponse.json();
+                    if (healthResponse.ok) {
+                        results.push('✅ Backend Health: PASSED');
+                    } else {
+                        results.push('❌ Backend Health: FAILED');
+                    }
+                } catch (error) {
+                    results.push('❌ Backend Health: FAILED - ' + error.message);
+                }
+
+                // Test 2: VPS API Data
+                try {
+                    const vpsResponse = await fetch(`${API_BASE}/test/vps-data`);
+                    const vpsData = await vpsResponse.json();
+                    if (vpsResponse.ok) {
+                        results.push('✅ VPS API Data: PASSED');
+                    } else {
+                        results.push('❌ VPS API Data: FAILED');
+                    }
+                } catch (error) {
+                    results.push('❌ VPS API Data: FAILED - ' + error.message);
+                }
+
+                // Test 3: Authentication
+                if (!authToken) {
+                    try {
+                        const authResponse = await fetch(`${API_BASE}/auth/login`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username: 'demon', password: 'shadow@123' })
+                        });
+                        const authData = await authResponse.json();
+                        if (authResponse.ok && authData.token) {
+                            authToken = authData.token;
+                            results.push('✅ Authentication: PASSED');
+                        } else {
+                            results.push('❌ Authentication: FAILED');
+                        }
+                    } catch (error) {
+                        results.push('❌ Authentication: FAILED - ' + error.message);
+                    }
+                } else {
+                    results.push('✅ Authentication: PASSED (Already authenticated)');
+                }
+
+                // Test 4: Enhanced Events with Auth
+                if (authToken) {
+                    try {
+                        const eventsResponse = await fetch(`${API_BASE}/enhanced/events?limit=3`, {
+                            headers: {
+                                'Authorization': `Bearer ${authToken}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        const eventsData = await eventsResponse.json();
+                        if (eventsResponse.ok && eventsData.events) {
+                            results.push('✅ Enhanced Events API: PASSED');
+                            results.push(`   - Events: ${eventsData.events.length}`);
+                            results.push(`   - Source: ${eventsData.metadata?.source || 'Unknown'}`);
+                        } else {
+                            results.push('❌ Enhanced Events API: FAILED');
+                        }
+                    } catch (error) {
+                        results.push('❌ Enhanced Events API: FAILED - ' + error.message);
+                    }
+                } else {
+                    results.push('❌ Enhanced Events API: SKIPPED (No auth token)');
+                }
+
+                // Display results
+                resultDiv.innerHTML = `
+                    <div class="info">
+                        <h4>📊 Complete Integration Test Results</h4>
+                        <div style="font-family: monospace; background: #f8f9fa; padding: 10px; border-radius: 3px;">
+                            ${results.join('<br>')}
+                        </div>
+                        <p><strong>Summary:</strong> ${results.filter(r => r.includes('✅')).length} passed, ${results.filter(r => r.includes('❌')).length} failed</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Complete Integration Test Failed</h4>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-run backend health check on page load
+        window.onload = function() {
+            testBackendHealth();
+        };
+    </script>
+</body>
+</html>
